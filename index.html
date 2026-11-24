@@ -1,0 +1,113 @@
+[atb_landing_demo.html](https://github.com/user-attachments/files/35326674/atb_landing_demo.html)
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Неофіційний навчальний концепт магазину продуктів у стилі ATБ.">
+  <title>АТБ — Свіжі пропозиції</title>
+  <style>
+    :root{--red:#e31b2b;--red2:#ff3344;--bg:#090909;--panel:#151515;--panel2:#1d1d1d;--muted:#a7a7a7;--white:#f7f7f7}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
+    a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{width:min(1180px,92%);margin:auto}
+    header{position:sticky;top:0;z-index:10;background:#090909ed;border-bottom:1px solid #292929;backdrop-filter:blur(12px)}
+    .top{height:76px;display:flex;align-items:center;gap:30px}.logo{font-size:30px;font-weight:1000;letter-spacing:-2px;color:white}.logo span{color:var(--red)}
+    nav{display:flex;gap:24px;margin-left:10px;color:#ddd;font-size:14px}nav a:hover{color:var(--red2)}
+    .search{margin-left:auto;display:flex;background:#202020;border:1px solid #333;border-radius:10px;overflow:hidden;width:min(300px,30vw)}
+    .search input{width:100%;background:transparent;border:0;outline:0;color:white;padding:12px}.search button{border:0;background:var(--red);color:white;padding:0 15px;cursor:pointer}
+    .cart-btn{border:0;border-radius:10px;background:var(--red);color:white;font-weight:800;padding:12px 16px;cursor:pointer;white-space:nowrap}
+    .hero{padding:42px 0 28px}.hero-box{min-height:330px;border-radius:22px;overflow:hidden;position:relative;display:flex;align-items:center;background:linear-gradient(90deg,#090909 0%,#090909ed 37%,#09090930 100%),url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=85') center/cover}
+    .hero-content{padding:48px;max-width:610px;position:relative}.eyebrow{color:#ff6570;text-transform:uppercase;font-size:12px;font-weight:900;letter-spacing:2px}
+    h1{font-size:clamp(38px,5vw,64px);line-height:.98;margin:14px 0 16px;letter-spacing:-2px}.hero p{color:#d0d0d0;line-height:1.6;max-width:460px}
+    .primary{display:inline-block;background:var(--red);color:white;border:0;border-radius:9px;padding:14px 21px;font-weight:900;margin-top:12px;cursor:pointer;transition:.2s}.primary:hover,.cart-btn:hover{background:#ff3445;transform:translateY(-2px)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:34px 0 18px}.section-head h2{font-size:30px;margin:0}.section-head p{color:var(--muted);margin:7px 0 0;font-size:14px}
+    .filters{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 22px}.filter{border:1px solid #393939;background:#171717;color:#ddd;border-radius:30px;padding:9px 15px;cursor:pointer}.filter.active,.filter:hover{background:var(--red);border-color:var(--red);color:white}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.product{background:var(--panel);border:1px solid #282828;border-radius:16px;overflow:hidden;transition:.2s}.product:hover{transform:translateY(-4px);border-color:#6d2028;box-shadow:0 12px 30px #0008}
+    .product img{width:100%;height:190px;object-fit:cover;display:block;background:#222}.product-body{padding:17px}.tag{display:inline-block;color:#ff6873;background:#3a1116;border-radius:5px;padding:5px 8px;font-size:10px;font-weight:900;text-transform:uppercase}
+    .product h3{margin:11px 0 7px;font-size:18px}.desc{color:var(--muted);font-size:13px;min-height:34px;line-height:1.4}.buy{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px}.price{font-size:21px;font-weight:900}.price small{font-size:12px;color:var(--muted);font-weight:400}
+    .add{border:0;background:#292929;color:white;border-radius:8px;padding:10px 13px;cursor:pointer;font-weight:800}.add:hover{background:var(--red)}
+    .promo{margin:46px 0;background:linear-gradient(110deg,#a90e1c,#e31b2b 58%,#650811);border-radius:18px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:25px}.promo h2{font-size:28px;margin:0 0 8px}.promo p{margin:0;color:#ffe2e4}.promo .primary{background:#111;margin:0}
+    .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 50px}.benefit{background:#141414;border:1px solid #292929;border-radius:13px;padding:20px}.benefit b{display:block;margin:9px 0}.benefit span{font-size:13px;color:var(--muted);line-height:1.5}.benefit i{font-style:normal;font-size:25px}
+    footer{border-top:1px solid #292929;padding:28px 0 35px;color:#999;font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:white}.notice{margin-top:18px;color:#666;font-size:11px}
+    .overlay{position:fixed;inset:0;background:#0009;z-index:20;display:none}.overlay.show{display:block}.drawer{position:fixed;right:0;top:0;height:100%;width:min(420px,100%);background:#121212;z-index:21;padding:24px;transform:translateX(105%);transition:.25s;overflow:auto;border-left:1px solid #333}.drawer.show{transform:translateX(0)}.drawer-head{display:flex;justify-content:space-between;align-items:center}.drawer h2{margin:0}.close{background:#292929;color:white;border:0;border-radius:8px;padding:9px 12px;cursor:pointer}.cart-line{display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid #333}.cart-line small{display:block;color:#999;margin-top:5px}.qty{display:flex;align-items:center;gap:8px}.qty button{background:#333;border:0;color:white;border-radius:6px;width:27px;height:27px;cursor:pointer}.total{font-size:22px;font-weight:900;display:flex;justify-content:space-between;margin:22px 0}.empty{color:#999;text-align:center;padding:45px 0}
+    @media(max-width:800px){nav{display:none}.top{gap:12px}.search{width:auto;flex:1}.grid{grid-template-columns:repeat(2,1fr)}.hero-content{padding:32px}.benefits{grid-template-columns:1fr}.promo{align-items:flex-start;flex-direction:column}}
+    @media(max-width:520px){.top{height:auto;min-height:68px;flex-wrap:wrap;padding:12px 0}.logo{font-size:26px}.search{order:3;width:100%;flex-basis:100%}.cart-btn{margin-left:auto;padding:10px 12px}.hero{padding-top:22px}.hero-box{min-height:360px;background-position:60% center}.hero-content{padding:25px}.grid{grid-template-columns:1fr 1fr;gap:10px}.product img{height:130px}.product-body{padding:11px}.product h3{font-size:15px}.desc{font-size:11px}.price{font-size:17px}.add{padding:8px;font-size:12px}.section-head h2{font-size:25px}.promo{padding:23px}.promo h2{font-size:24px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap top">
+  <a class="logo" href="#">АТБ<span>.</span></a>
+  <nav><a href="#catalog">Каталог</a><a href="#offers">Акції</a><a href="#about">Про нас</a></nav>
+  <label class="search"><input id="search" type="search" placeholder="Знайти товар..." aria-label="Пошук товарів"><button aria-label="Шукати" onclick="render()">⌕</button></label>
+  <button class="cart-btn" onclick="openCart()">Кошик <span id="cartCount">0</span></button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero"><div class="hero-box"><div class="hero-content">
+    <div class="eyebrow">Вигідні покупки щодня</div>
+    <h1>Більше вигоди.<br>Менше витрат.</h1>
+    <p>Добірка популярних товарів для дому та щоденного столу. Обирай улюблене й додавай до кошика.</p>
+    <a class="primary" href="#catalog">Переглянути товари</a>
+  </div></div></section>
+
+  <section id="catalog">
+    <div class="section-head"><div><h2>Популярні товари</h2><p>Демонстраційний каталог — приклад оформлення</p></div></div>
+    <div class="filters">
+      <button class="filter active" data-cat="Усі">Усі товари</button>
+      <button class="filter" data-cat="Овочі та фрукти">Овочі та фрукти</button>
+      <button class="filter" data-cat="Молочні продукти">Молочні</button>
+      <button class="filter" data-cat="Бакалія">Бакалія</button>
+      <button class="filter" data-cat="Напої">Напої</button>
+    </div>
+    <div class="grid" id="products"></div>
+  </section>
+
+  <section class="promo" id="offers"><div><h2>Твоя вигідна покупка починається тут</h2><p>Зручний каталог, зрозумілі ціни та швидкий вибір товарів.</p></div><a class="primary" href="#catalog">Обрати товари</a></section>
+
+  <section id="about" class="benefits">
+    <div class="benefit"><i>🛒</i><b>Зручний вибір</b><span>Знаходь потрібне через пошук або категорії.</span></div>
+    <div class="benefit"><i>🏷️</i><b>Вигідні пропозиції</b><span>Акцент на товарах і спеціальних пропозиціях.</span></div>
+    <div class="benefit"><i>📱</i><b>Адаптивний дизайн</b><span>Сторінка зручно виглядає на телефоні та комп’ютері.</span></div>
+  </section>
+</main>
+<footer><div class="wrap"><div class="foot"><strong>АТБ — концепт головної сторінки</strong><span>Навчальний проєкт веброзробника</span><span>Каталог · Акції · Контакти</span></div><div class="notice">Неофіційний навчальний концепт. Сторінка не пов’язана з мережею АТБ. Товари, ціни та зображення наведені лише для демонстрації.</div></div></footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer" aria-label="Кошик">
+  <div class="drawer-head"><h2>Ваш кошик</h2><button class="close" onclick="closeCart()">✕</button></div>
+  <div id="cartItems"></div><div class="total"><span>Разом</span><span id="total">0,00 ₴</span></div>
+  <button class="primary" style="width:100%" onclick="alert('Це демонстраційний кошик — оформлення замовлення не підключене.')">Оформити замовлення</button>
+</aside>
+
+<script>
+const products=[
+ {id:1,name:'Яблука',desc:'Соковиті яблука, 1 кг',price:34.90,cat:'Овочі та фрукти',tag:'Свіже',img:'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=700&q=80'},
+ {id:2,name:'Молоко',desc:'Молоко пастеризоване, 900 мл',price:42.50,cat:'Молочні продукти',tag:'Популярне',img:'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=700&q=80'},
+ {id:3,name:'Банани',desc:'Стиглі банани, 1 кг',price:59.90,cat:'Овочі та фрукти',tag:'Хіт',img:'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=700&q=80'},
+ {id:4,name:'Макарони',desc:'Макаронні вироби, 400 г',price:29.90,cat:'Бакалія',tag:'Вигідно',img:'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=700&q=80'},
+ {id:5,name:'Апельсиновий сік',desc:'Фруктовий напій, 1 л',price:54.90,cat:'Напої',tag:'Спробуй',img:'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=700&q=80'},
+ {id:6,name:'Сир твердий',desc:'Твердий сир, 200 г',price:89.90,cat:'Молочні продукти',tag:'Смакуй',img:'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=700&q=80'}
+];
+let category='Усі',cart={};
+const money=n=>n.toFixed(2).replace('.',',')+' ₴';
+function render(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ const list=products.filter(p=>(category==='Усі'||p.cat===category)&&(`${p.name} ${p.desc}`.toLowerCase().includes(q)));
+ document.getElementById('products').innerHTML=list.map(p=>`<article class="product"><img src="${p.img}" alt="${p.name}" loading="lazy"><div class="product-body"><span class="tag">${p.tag}</span><h3>${p.name}</h3><div class="desc">${p.desc}</div><div class="buy"><div class="price">${money(p.price)} <small>/ шт.</small></div><button class="add" onclick="add(${p.id})">＋ Додати</button></div></div></article>`).join('')||'<p style="color:#aaa">Нічого не знайдено. Спробуй інший запит.</p>';
+}
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');category=b.dataset.cat;render()}));
+document.getElementById('search').addEventListener('input',render);
+function add(id){cart[id]=(cart[id]||0)+1;updateCart()}
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateCart()}
+function updateCart(){
+ const count=Object.values(cart).reduce((a,b)=>a+b,0);document.getElementById('cartCount').textContent=count;
+ const entries=Object.entries(cart);let total=0;
+ document.getElementById('cartItems').innerHTML=entries.length?entries.map(([id,qty])=>{const p=products.find(x=>x.id==id);total+=p.price*qty;return `<div class="cart-line"><div><b>${p.name}</b><small>${money(p.price)} за одиницю</small></div><div class="qty"><button onclick="change(${id},-1)">−</button><b>${qty}</b><button onclick="change(${id},1)">+</button></div></div>`}).join(''):'<div class="empty">Кошик поки порожній</div>';
+ document.getElementById('total').textContent=money(total);
+}
+function openCart(){document.getElementById('drawer').classList.add('show');document.getElementById('overlay').classList.add('show')}
+function closeCart(){document.getElementById('drawer').classList.remove('show');document.getElementById('overlay').classList.remove('show')}
+render();updateCart();
+</script>
+</body>
+</html>
